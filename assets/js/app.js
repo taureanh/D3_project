@@ -14,7 +14,7 @@ function makeResponsive() {
         .attr("width", svgWidth)
         .attr("height", svgHeight);
     
-    var chart = svg.append("g")
+    var chartGroup = svg.append("g")
         .attr("transform", `translate(${margin.left}, ${margin.top})`);
     
     //retrieve data from data.csv file
@@ -47,15 +47,15 @@ function makeResponsive() {
         var yAxis = d3.axisLeft(yLinearScale);
     
     //Append axis to the chart
-        chart.append("g")
+        chartGroup.append("g")
         .attr("transform", `translate(0, ${height})`)
         .call(xAxis);
     
-        chart.append("g")
+        chartGroup.append("g")
         .call(yAxis);
         
     //create circles for states
-        var circlesGroup = chart.selectAll("circle")
+        var circlesGroup = chartGroup.selectAll("circle")
             .data(healthData)
             .enter()
             .append("circle")
@@ -67,7 +67,7 @@ function makeResponsive() {
             .attr("stroke-width", "1")
             .attr("stroke", "black");
     
-            chart.select("g")
+            chartGroup.select("g")
             .selectAll("circle")
             .data(healthData)
             .enter()
@@ -102,7 +102,7 @@ function makeResponsive() {
         
 
         //Create labels
-        chart.append("text")
+        chartGroup.append("text")
           .attr("transform", "rotate(-90)")
           .attr("y", 0 - 60)
           .attr("x", 0 -230)
@@ -110,7 +110,7 @@ function makeResponsive() {
           .attr("class", "axisText")
           .text("Lacks Healthcare (%)");
     
-        chart.append("text")
+        chartGroup.append("text")
           .attr("transform", `translate(${width / 2.5}, ${height + margin.top + 25})`)
           .attr("class", "axisText")
           .text("In Poverty (%)");
